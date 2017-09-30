@@ -5,7 +5,7 @@ class ReadingAbility
   end
   
   def read!
-    throw NotImplementedError, 'Please, redeclare this method in child class, don`t use the abstract method!'
+    raise NotImplementedError, 'Please, redeclare this method in child class, don`t use the abstract method!'
   end
 end
 

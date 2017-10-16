@@ -1,4 +1,5 @@
 # The crowd of different kind of people with different kind of reading abilities
+# 
 # CONTEXTS Man: Child, Grown, BlindMan
 # STRATEGIES ReadingAbility: CantRead, CantEverRead, LearnRead, CanRead
 

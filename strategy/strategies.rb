@@ -1,4 +1,4 @@
-# STRATEGIES ABSTRACT SUPER CLASS
+# ABSTRACT STRATEGY
 class ReadingAbility
   def reading_ability
     puts 'Reading ability: ' + self.class.name

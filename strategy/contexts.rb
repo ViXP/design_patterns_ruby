@@ -1,4 +1,4 @@
-# CONTEXT ABSTRACT SUPER CLASS
+# ABSTRACT CONTEXT
 require './strategies'
 
 class Man 
@@ -26,7 +26,7 @@ class Man
   end
 end
 
-# CONCRETE CONTEXTS CLASSES
+# CONCRETE CONTEXTS
 class Child < Man
   def initialize name
     super(name)

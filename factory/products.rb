@@ -1,9 +1,12 @@
 # ABSTRACT PRODUCT
 class Guitar
-  attr_reader :strings, :name, :frets
+  @@models = {}
 
-  def initialize num_strings
+  attr_reader :strings, :frets, :model
+
+  def initialize num_strings = false
     @name = ''
+    @model = ''
     @strings = num_strings
     @string_types = []
     @amp = false
@@ -15,6 +18,7 @@ class Guitar
       fretboard: '',
       neck: ''
     }
+    set_model
   end
 
   def amplification_required?
@@ -29,6 +33,18 @@ class Guitar
     woods = ''
     @woods.each { |component, name| woods << "\n#{component.to_s.upcase}: #{name}" }
     woods
+  end
+
+  def name
+    "#{@name} (#{self.model})"
+  end
+
+  def set_model
+    puts 'Please, type your own model designation (2-3 letters): '
+    @model = gets.slice(0,3).tr("\n", '').upcase 
+    @model = @model.length > 1 ? @model : 'GT'
+    @@models[@model] = @@models[@model] ? @@models[@model] + 1 : 1
+    @model += "-#{@@models[@model]}"
   end
 
   def pickups
@@ -57,6 +73,7 @@ end
 # CONCRETE PRODUCTS
 class ClassicGuitar < Guitar
   def initialize num_strings = 6
+    super
     @name = 'Classic acoustic guitar'
     @strings = num_strings
     @string_types = %w(nylon gut)
@@ -76,6 +93,7 @@ end
 
 class AcousticGuitar < Guitar
   def initialize num_strings = 6
+    super
     @name = 'Dreadnought acoustic guitar'
     @strings = num_strings
     @string_types = %w(silk_&_steel bronze phosphor/bronze coated)
@@ -96,6 +114,7 @@ end
 
 class ElectricGuitar < Guitar
   def initialize num_strings = 6
+    super
     @name = 'SG-style electric guitar'
     @strings = num_strings
     @string_types = %w(steel nickel-plated nickel coated)
@@ -118,6 +137,7 @@ end
 
 class BassGuitar < Guitar
   def initialize num_strings = 4
+    super
     @name = 'Electric bass guitar'
     @strings = num_strings
     @string_types = %w(steel nickel-plated nickel coated)

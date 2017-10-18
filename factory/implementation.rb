@@ -1,4 +1,4 @@
-# the customshop factory of guitars can make the custrom instrument for user
+# The customshop factory of guitars can make the custrom instrument for user
 # (the type of instrument and model name must be specified in terminal).
 # 
 # FACTORY GuitarFactory

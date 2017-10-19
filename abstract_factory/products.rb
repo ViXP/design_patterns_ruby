@@ -1,4 +1,4 @@
-# ABSTRACT PRODUCT TYPE
+# ABSTRACT PRODUCTS
 require './components'
 
 class TobaccoMixture
@@ -65,7 +65,24 @@ class TobaccoMixture
   end
 end
 
-# CONCRETE PRODUCTS TYPES
+# CONCRETE PRODUCTS
+class TobaccoPipe
+  attr_reader :title, :model, :description
+
+  def initialize title, model, description
+    @title, @model, @description = title, model, description
+  end
+
+  def specifications
+    puts <<~SPECS
+      #{self.title} (#{self.model})
+      -----------------------------
+      Pipe description: 
+      #{self.description}
+    SPECS
+  end
+end
+
 class EnglishMixture < TobaccoMixture
   def initialize
     super

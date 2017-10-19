@@ -1,6 +1,7 @@
 # The pipe tobacco boutique which can blend the tobacco mixture from user recipe
-# (the type of mixture must be defined and the weight of tobacco components).
-# components may be added during the runtime also
+# (the type of mixture must be defined and the weight of tobacco components),
+# components may be added during the runtime also. As a bonus, the boutique
+# will give a thematic free pipe for every customer. 
 # 
 # FACTORIES TobaccoBlendFactory: EnglishBlendFactory, AmericanBlendFactory, ScottishBlendFactory, BalkanBlendFactory, DanishhBlendFactory, VaperBlendFactory, VirginiaBlendFactory
 # PRODUCTS TobaccoMixture: EnglishMixture, AmericanMixture, ScottishMixture, BalkanMixture, DanishMixture, VirginiaMixture, VaperMixture
@@ -17,10 +18,14 @@ puts <<~WELCOME
   D - Danish blend
   P - Va/Per blend
   V - Virginia blend
-  Please, make your choice!'
+  Please, make your choice!
+  P.S: For you we have a special prize - you\'ll get an exclusive tobacco pipe for each kind of blend today!'
 WELCOME
 
-tobacco = TobaccoBlendFactory.make_tobacco(gets.tr("\tr", '').slice(0,1).capitalize)
+factory = TobaccoPipeFactory.set_factory(gets.chomp.slice(0,1).capitalize)
+tobacco = factory.make_blend! # product #1 created by factory
+pipe = factory.make_pipe! # product #2 created by factory
 tobacco.recipe
 tobacco << Latakia.new # adding the component during the runtime
 tobacco.recipe # shows the result recipe
+pipe.specifications # shows the spicifications of second product, created by factory

@@ -1,7 +1,14 @@
-# CONCRETE DIRECTORS
+# ABSTRACT DIRECTOR
 require './builder'
 
-class ZeroSkateboardBuilderDirector
+class SkateboardBuilderDirector
+  def self.construct
+    raise NotImplementedError, 'Please, redeclare this method in child class, don\'t use the abstract method!'
+  end
+end
+
+# CONCRETE DIRECTORS
+class ZeroSkateboardBuilderDirector < SkateboardBuilderDirector
   def self.construct
     SkateboardBuilder.new('Zero brand skateboard')
     .set_deck('Zero PY Blood Skull', :maple, 7)
@@ -12,7 +19,7 @@ class ZeroSkateboardBuilderDirector
   end
 end
 
-class BlindSkateboardBuilderDirector
+class BlindSkateboardBuilderDirector < SkateboardBuilderDirector
   def self.construct
     SkateboardBuilder.new('Blind brand skateboard')
     .set_deck('Blind Dark Horse Red/Black', :maple, 7)
@@ -23,7 +30,7 @@ class BlindSkateboardBuilderDirector
   end
 end
 
-class CustomSkateboardBuilderDirector
+class CustomSkateboardBuilderDirector < SkateboardBuilderDirector
   def self.construct
     SkateboardBuilder.new('Great custom build skateboard')
     .set_deck('Girl Wilson Contemporary OG SU17', :maple, 7)

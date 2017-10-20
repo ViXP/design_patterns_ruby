@@ -1,6 +1,6 @@
 # Skateboards shop can build brand skates and great custom skates
 # 
-# DIRECTORS ZeroSkateboardBuilderDirector, BlindSkateboardBuilderDirector, CustomSkateboardBuilderDirector
+# DIRECTORS SkateboardBuilderDirector: ZeroSkateboardBuilderDirector, BlindSkateboardBuilderDirector, CustomSkateboardBuilderDirector
 # BUILDER SkateboardBuilder
 # PRODUCT Skateboard
 # COMPONENTS SkateComponent: Deck, Truck, Bearing, Wheel, GripTape

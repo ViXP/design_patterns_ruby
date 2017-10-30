@@ -3,7 +3,7 @@ class SkateComponent
   attr_reader :title
 
   def show_info
-    raise NotImplementedError, 'Please, redeclare this method in child class, don\'t use the abstract method!'
+    raise NotImplementedError, 'Please, redeclare this method in a child class, don\'t use the abstract method!'
   end
 end
 

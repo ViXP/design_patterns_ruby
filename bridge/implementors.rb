@@ -10,7 +10,7 @@ class Room
   end
 
   def analyze
-    raise NotImplementedError, 'Please, redeclare this method in child class, don\'t use the abstract method!'
+    raise NotImplementedError, 'Please, redeclare this method in a child class, don\'t use the abstract method!'
   end
 
   def objects

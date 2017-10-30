@@ -24,7 +24,7 @@ class TobaccoPipeFactory
   end
 
   def make_blend!
-    raise NotImplementedError, 'Please, redeclare this method in child class, don\'t use the abstract method!'
+    raise NotImplementedError, 'Please, redeclare this method in a child class, don\'t use the abstract method!'
   end
 
   def make_pipe!

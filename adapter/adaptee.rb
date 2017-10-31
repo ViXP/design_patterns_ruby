@@ -45,4 +45,6 @@ class GEOLocatorRemoteAPI
   end
 
   ld_coords
+
+  private_methods :new
 end

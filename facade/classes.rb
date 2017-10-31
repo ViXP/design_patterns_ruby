@@ -28,6 +28,8 @@ class Cook
   def self.ready!
     puts "\e[32m\e[1mTHE DISH IS READY!\n\e[0m"
   end
+
+  private_methods :new
 end
 
 class Water

@@ -5,6 +5,8 @@ class SkateboardBuilderDirector
   def self.construct
     raise NotImplementedError, 'Please, redeclare this method in a child class, don\'t use the abstract method!'
   end
+  
+  private_methods :new
 end
 
 # CONCRETE DIRECTORS

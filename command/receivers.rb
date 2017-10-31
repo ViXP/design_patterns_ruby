@@ -30,6 +30,8 @@ class Drawer
     super arg
     $OUTPUT += arg.to_s
   end
+
+  private_methods :new
 end
 
 class TopLeftCornerDrawer < Drawer

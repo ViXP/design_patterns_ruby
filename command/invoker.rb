@@ -24,4 +24,6 @@ class CommandInvoker
     return false unless command
     invoke command
   end
+
+  private_methods :new
 end

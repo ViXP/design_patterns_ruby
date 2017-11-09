@@ -22,7 +22,7 @@ class LogisticsMachine
         return true
       end
     end
-    false
+    raise SecurityError, 'No storages for new products are affiliated!'
   end
 
   def self.rent product

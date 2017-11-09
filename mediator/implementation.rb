@@ -4,7 +4,7 @@
 # coupled anymore and know nothing about this part of the logic.
 # 
 # MEDIATOR LogisticsMachine
-# COLLEAGUES Product, Storage
+# COLLEAGUES AbstractColleague: Product, Storage
 
 require './colleagues'
 

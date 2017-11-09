@@ -1,14 +1,25 @@
-# CONCRETE COLLEAGUES
+# ABSTRACT COLLEAGUE
 require './mediator'
 
-class Product
+class AbstractColleague
+  def initialize *args
+    register_mediator
+  end
+
+  private
+
+  def register_mediator
+    raise NotImplementedError, 'Please, redeclare this method in a child class, don\'t use the abstract method!'
+  end
+end
+
+# CONCRETE COLLEAGUES
+class Product < AbstractColleague
   def initialize title = '', price = '10'
+    super
     @title = title
     @price = price
     @status = :available
-    unless LogisticsMachine.store(self)
-      raise SecurityError, 'No storages for new products are affiliated!'
-    end
   end
 
   def rent
@@ -29,21 +40,27 @@ class Product
       Status: #{@status}
     DESCRIPTION
   end
+
+  private
+
+  def register_mediator
+    LogisticsMachine.store self
+  end
 end
 
-class Storage
+class Storage < AbstractColleague
   @@storage_count = 0
 
   attr_reader :products
 
   def initialize address = false, places = 250
+    super
     @@storage_count += 1
     @number = @@storage_count
     @products_count = 0
     @places = places
     @products = []
     @address = address
-    LogisticsMachine.affiliate self
   end
 
   def clear_products
@@ -79,5 +96,11 @@ class Storage
       Free capacity: #{free_places} units
       #{'*' * 30}
     DESCRIPTION
+  end
+
+  private
+
+  def register_mediator
+    LogisticsMachine.affiliate self
   end
 end

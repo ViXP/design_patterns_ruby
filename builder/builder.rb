@@ -5,36 +5,36 @@ require './product'
 class SkateboardBuilder
   attr_reader :details
 
-  def initialize title = ''
+  def initialize(title = '')
     @title = title
     @details = {}
   end
 
-  def set_deck *args
+  def use_deck(*args)
     @details[:deck] = Deck.new(*args)
     self
   end
 
-  def set_trucks *args
+  def use_trucks(*args)
     @details[:trucks] = Truck.new(*args)
     self
   end
 
-  def set_bearings *args
+  def use_bearings(*args)
     @details[:bearings] = Bearing.new(*args)
     self
   end
 
-  def set_wheels *args
+  def use_wheels(*args)
     @details[:wheels] = Wheel.new(*args)
     self
   end
 
-  def set_griptape *args
+  def use_griptape(*args)
     @details[:griptape] = GripTape.new(*args)
     self
   end
-  
+
   def build!
     Skateboard.new(@title, @details)
   end

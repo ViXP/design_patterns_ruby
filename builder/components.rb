@@ -3,7 +3,10 @@ class SkateComponent
   attr_reader :title
 
   def show_info
-    raise NotImplementedError, 'Please, redeclare this method in a child class, don\'t use the abstract method!'
+    raise(
+      NotImplementedError,
+      'Redeclare this method in a child class, don\'t use the abstract method!'
+    )
   end
 end
 
@@ -11,7 +14,7 @@ end
 class Deck < SkateComponent
   attr_reader :wood, :layers
 
-  def initialize title, wood = :maple, layers = 7 
+  def initialize(title, wood = :maple, layers = 7)
     @title = title
     @wood = wood
     @layers = layers
@@ -20,9 +23,9 @@ class Deck < SkateComponent
   def show_info
     <<~INFO
       -----------
-      Title: #{self.title}
-      Wood: #{self.wood}
-      Number of layers: #{self.layers}
+      Title: #{title}
+      Wood: #{wood}
+      Number of layers: #{layers}
     INFO
   end
 end
@@ -30,13 +33,13 @@ end
 class Truck < SkateComponent
   attr_reader :size, :colors
 
-  def initialize title, size, colors = []
+  def initialize(title, size, colors = [])
     @title = title
     @size = size
     @colors = colors
   end
 
-  def colors 
+  def colors
     string = ''
     @colors.each {|color| string += "#{color}/" }
     string.chomp('/')
@@ -45,9 +48,9 @@ class Truck < SkateComponent
   def show_info
     <<~INFO
       -----------
-      Title: #{self.title}
-      Size: #{self.size}cm
-      Colors: #{self.colors}
+      Title: #{title}
+      Size: #{size}cm
+      Colors: #{colors}
     INFO
   end
 end
@@ -55,13 +58,13 @@ end
 class Bearing < SkateComponent
   attr_reader :abec, :colors
 
-  def initialize title, abec, colors = []
+  def initialize(title, abec, colors = [])
     @title = title
     @abec = abec
     @colors = colors
   end
 
-  def colors 
+  def colors
     string = ''
     @colors.each {|color| string += "#{color}/" }
     string.chomp('/')
@@ -70,17 +73,17 @@ class Bearing < SkateComponent
   def show_info
     <<~INFO
       -----------
-      Title: #{self.title}
-      ABEC: #{self.abec}
-      Colors: #{self.colors}
+      Title: #{title}
+      ABEC: #{abec}
+      Colors: #{colors}
     INFO
   end
 end
 
 class Wheel < SkateComponent
   attr_reader :diameter, :density, :image_type
-  
-  def initialize title, diameter, density, image_type
+
+  def initialize(title, diameter, density, image_type)
     @title = title
     @diameter = diameter
     @density = density
@@ -90,10 +93,10 @@ class Wheel < SkateComponent
   def show_info
     <<~INFO
       -----------
-      Title: #{self.title}
-      Diameter: #{self.diameter}mm
-      Density: #{self.density}A
-      Image: #{self.image_type}
+      Title: #{title}
+      Diameter: #{diameter}mm
+      Density: #{density}A
+      Image: #{image_type}
     INFO
   end
 end
@@ -101,7 +104,7 @@ end
 class GripTape < SkateComponent
   attr_reader :image_type
 
-  def initialize title, image_type
+  def initialize(title, image_type)
     @title = title
     @image_type = image_type
   end
@@ -109,8 +112,8 @@ class GripTape < SkateComponent
   def show_info
     <<~INFO
       -----------
-      Title: #{self.title}
-      Image: #{self.image_type}
+      Title: #{title}
+      Image: #{image_type}
     INFO
   end
 end

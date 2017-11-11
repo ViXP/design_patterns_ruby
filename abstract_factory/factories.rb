@@ -17,7 +17,7 @@ class TobaccoPipeFactory
 
   def make_blend!
     raise(
-      NotImplementedError, \
+      NotImplementedError,
       'Redeclare this method in a child class, don\'t use the abstract method!'
     )
   end
@@ -44,7 +44,7 @@ class EnglishFactory < TobaccoPipeFactory
   def make_pipe!
     super do
       TobaccoPipe.new(
-        'Dunhill Bruyere', '3110', \
+        'Dunhill Bruyere', '3110',
         'The orignal finish produced, and a big part of developing and ' \
         'marketing the brand. It was the only finish from 1910 until 1917. A ' \
         'dark redish brown stain. Bruyere pipes were usually made using ' \
@@ -70,7 +70,7 @@ class AmericanFactory < EnglishFactory
   def make_pipe!
     return @pipe if @pipe
     @pipe = TobaccoPipe.new(
-      'Medico Standard Straight', '225', \
+      'Medico Standard Straight', '225',
       'The Medico 225 model pipe seems to take the form of a panel shape, but' \
       'is missing the square shaped shank. A black colored brylon and dark ' \
       'vulcanite stem combine to add a bit of mystery and intrigue to this ' \
@@ -95,7 +95,7 @@ class ScottishFactory < TobaccoPipeFactory
   def make_pipe!
     super do
       TobaccoPipe.new(
-        'Rattray\'s Caledonia', 'RA 59', \
+        'Rattray\'s Caledonia', 'RA 59',
         'Classic models with a small inlayed band in an intersting warm ' \
         'terracottacolour. Caledonia is the latin-celtic word for Scotland.'
       )
@@ -118,7 +118,7 @@ class BalkanFactory < TobaccoPipeFactory
   def make_pipe!
     super do
       TobaccoPipe.new(
-        'Emin Brothers Deluxe Eagle\'s Claw', '8022', \
+        'Emin Brothers Deluxe Eagle\'s Claw', '8022',
         'Pipes are made of high quality Eskisehir Meerschaum which is very ' \
         'well known by experts. Unlike briar, meerschaum does not burn. ' \
         'Meerschaum pipes do not need pre-smoking to have a good quality ' \
@@ -142,7 +142,7 @@ class DanishFactory < TobaccoPipeFactory
   def make_pipe!
     super do
       TobaccoPipe.new(
-        'Stanwell Black & White', '409', \
+        'Stanwell Black & White', '409',
         'Black & White pipes are the newest ones from Stanwell that offer an ' \
         'option of two stems; one stem is regular length and the other is a ' \
         'semi-churchwarden stem for those times you need a long, cool smoke. ' \
@@ -166,7 +166,7 @@ class VirginiaFactory < TobaccoPipeFactory
   def make_pipe!
     super do
       TobaccoPipe.new(
-        'Peterson FIsherman\'s Sandblast', 'X105', \
+        'Peterson FIsherman\'s Sandblast', 'X105',
         'The Peterson Fisherman Series is a new range of pipes launched in ' \
         '2015. Inspired by the love of fishing from someone in the Peterson ' \
         'factory, this pipe is characterised by it black, sandblasted bowl ' \
@@ -191,7 +191,7 @@ class VaperFactory < TobaccoPipeFactory
   def make_pipe!
     super do
       TobaccoPipe.new(
-        'Vauen' , 'CARO-1', \
+        'Vauen' , 'CARO-1',
         'Designer pipe conceptualized by Markus Bischof. Extravagant pipe in ' \
         'a modern contemporary design. Elegant lines with very flat held ' \
         'mouthpiece bit.'

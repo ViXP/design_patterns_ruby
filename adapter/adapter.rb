@@ -2,7 +2,7 @@
 require './target'
 
 class RemotePlacesLocatorAdapter < LocalPlacesLocator
-  def initialize adaptee
+  def initialize(adaptee)
     @adaptee = adaptee
   end
 
@@ -14,7 +14,7 @@ class RemotePlacesLocatorAdapter < LocalPlacesLocator
     print @adaptee.rnd_coord
   end
 
-  def new_finding lat, long
+  def new_finding(lat, long)
     @adaptee.appnd_ncoord lat, long
   end
 end

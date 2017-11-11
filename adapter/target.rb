@@ -14,13 +14,13 @@ class LocalPlacesLocator
     print readable(@locations.sample)
   end
 
-  def new_finding lat, long
-    @locations << {'lat' => lat, 'long' => long}
+  def new_finding(lat, long)
+    @locations << { 'lat' => lat, 'long' => long }
   end
 
   private
 
-  def readable location
+  def readable(location)
     "Latitude: #{location['lat']}, Longitude: #{location['long']};\n"
   end
 end

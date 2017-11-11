@@ -4,7 +4,7 @@ class Guitar
 
   attr_reader :strings, :frets, :model
 
-  def initialize num_strings = false
+  def initialize(num_strings = false)
     @name = ''
     @model = ''
     @strings = num_strings
@@ -12,17 +12,12 @@ class Guitar
     @amp = false
     @frets = 0
     @pickups = false
-    @woods = {
-      top: '',
-      body: '',
-      fretboard: '',
-      neck: ''
-    }
+    @woods = { top: '', body: '', fretboard: '', neck: '' }
     set_model
   end
 
   def amplification_required?
-    !!@amp
+    @amp
   end
 
   def string_types
@@ -31,58 +26,65 @@ class Guitar
 
   def woods
     woods = ''
-    @woods.each { |component, name| woods << "\n#{component.to_s.upcase}: #{name}" }
+    @woods.each do |component, name|
+      woods << "\n#{component.to_s.upcase}: #{name}"
+    end
     woods
   end
 
   def name
-    "#{@name} (#{self.model})"
+    "#{@name} (#{model})"
   end
 
   def set_model
     puts 'Please, type your own model designation (2-3 letters): '
-    @model = gets.slice(0,3).tr("\n", '').upcase 
+    @model = gets.slice(0, 3).tr("\n", '').upcase
     @model = @model.length > 1 ? @model : 'GT'
     @@models[@model] = @@models[@model] ? @@models[@model] + 1 : 1
     @model += "-#{@@models[@model]}"
   end
 
   def pickups
-    !@pickups ? 'none' : @pickups.respond_to?(:each) ? @pickups.join(', ') : @pickups  
+    return 'none' unless @pickups
+    @pickups.respond_to?(:each) ? @pickups.join(', ') : @pickups
   end
 
   def show_info
     print <<~INFO
       ------------------------------
-      #{self.name}
+      #{name}
       ------------------------------
-      Number of strings: #{self.strings}
-      Types of strings supported: #{self.string_types}
-      Number of frets: #{self.frets}
-      Information about the wood of this instrument: #{self.woods}
-      Pickups: #{self.pickups}
-      #{'This product can\'t be properly used without external amplification!' if self.amplification_required?}
+      Number of strings: #{strings}
+      Types of strings supported: #{string_types}
+      Number of frets: #{frets}
+      Information about the wood of this instrument: #{woods}
+      Pickups: #{pickups}
+      #{if amplification_required?
+          print 'This product can\'t be properly used without external '\
+          'amplification!'
+      end}
     INFO
   end
 
   def play
-    raise NotImplementedError, 'Please, redeclare this method in a child class, don\'t use the abstract method!'
+    raise(
+      NotImplementedError,
+      'Redeclare this method in a child class, don\'t use the abstract method!'
+    )
   end
 end
 
 # CONCRETE PRODUCTS
 class ClassicGuitar < Guitar
-  def initialize num_strings = 6
+  def initialize(num_strings = 6)
     super
     @name = 'Classic acoustic guitar'
     @strings = num_strings
-    @string_types = %w(nylon gut)
+    @string_types = %i[nylon gut]
     @frets = 19
     @woods = {
-      top: 'Cedar',
-      body: 'Mahogany',
-      fretboard: 'Rosewood',
-      neck: 'Mahogany'
+      top: 'Cedar', body: 'Mahogany',
+      fretboard: 'Rosewood', neck: 'Mahogany'
     }
   end
 
@@ -92,18 +94,16 @@ class ClassicGuitar < Guitar
 end
 
 class AcousticGuitar < Guitar
-  def initialize num_strings = 6
+  def initialize(num_strings = 6)
     super
     @name = 'Dreadnought acoustic guitar'
     @strings = num_strings
-    @string_types = %w(silk_&_steel bronze phosphor/bronze coated)
+    @string_types = %w[silk_&_steel bronze phosphor/bronze coated]
     @frets = 22
     @pickups = 'single piezo custom pickup with active preamp'
     @woods = {
-      top: 'Spruce',
-      body: 'Mahogany',
-      fretboard: 'Ebony',
-      neck: 'Maple'
+      top: 'Spruce', body: 'Mahogany',
+      fretboard: 'Ebony', neck: 'Maple'
     }
   end
 
@@ -113,42 +113,38 @@ class AcousticGuitar < Guitar
 end
 
 class ElectricGuitar < Guitar
-  def initialize num_strings = 6
+  def initialize(num_strings = 6)
     super
     @name = 'SG-style electric guitar'
     @strings = num_strings
-    @string_types = %w(steel nickel-plated nickel coated)
+    @string_types = %i[steel nickel-plated nickel coated]
     @amp = false
     @frets = 24
-    @pickups = %w('EMG-81 ceramic magnets neck pickup' 'EMG-89 AlNiCo magnets bridge pickup')
+    @pickups = ['EMG-81 ceramic magnets pickup', 'EMG-89 AlNiCo magnets pickup']
     @amp = true
-    @woods = {
-      top: 'Ebony',
-      body: 'Mahogany',
-      fretboard: 'Ebony',
-      neck: 'Nahogany'
-    }  
+    @woods = { top: 'Ebony', body: 'Mahogany',
+      fretboard: 'Ebony', neck: 'Nahogany' }
   end
 
   def play
-    puts self.strings > 6 ? 'D-jent, d-jent! D-d-d-jent, d-jent!' : 'Pow-ow! Wah-wah-wah, waaaah... Dj, dj. dj!'
+    if strings > 6
+      puts 'D-jent, d-jent! D-d-d-jent, d-jent!'
+    else
+      puts 'Pow-ow! Wah-wah-wah, waaaah... Dj, dj. dj!'
+    end
   end
 end
 
 class BassGuitar < Guitar
-  def initialize num_strings = 4
+  def initialize(num_strings = 4)
     super
     @name = 'Electric bass guitar'
     @strings = num_strings
-    @string_types = %w(steel nickel-plated nickel coated)
+    @string_types = %i[steel nickel-plated nickel coated]
     @frets = 22
     @pickups = '2 custom-made singlecoil pickups'
     @amp = true
-    @woods = {
-      body: 'Walnut',
-      neck: 'Maple',
-      fretboard: 'Maple'
-    }
+    @woods = { body: 'Walnut', neck: 'Maple', fretboard: 'Maple' }
   end
 
   def play

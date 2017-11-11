@@ -1,18 +1,18 @@
 # CONCRETE MANIPULATED CLASSES
 class Cook
-  def self.start_cooking dish_name
+  def self.start_cooking(dish_name)
     puts "\e[4mStart cooking the #{dish_name}!\e[0m"
   end
 
-  def self.get_pan
+  def self.use_pan
     puts "\e[33mGet a big pan\e[0m"
   end
 
-  def self.get_dripping_pan
+  def self.use_dripping_pan
     puts "\e[33mGet the hot pan with seed oil\e[0m"
   end
 
-  def self.wait_for mins
+  def self.wait_for(mins)
     puts "\e[34mWait for #{mins} minutes...\e[0m"
     sleep mins
   end
@@ -40,19 +40,17 @@ class Water
     @temperature = 25.0
   end
 
-  def pour amn
+  def pour(amn)
     @amount = amn
   end
 
-  def warm_up tempr
-    while @temperature <= tempr
-      @temperature += 0.01
-    end
+  def warm_up(tempr)
+    @temperature += 0.01 while @temperature <= tempr
     puts "The water is warmed up to #{temperature}°C"
   end
 
   def fill_in
-    puts "The water is added to the mix"
+    puts 'The water is added to the mix'
   end
 
   def boil
@@ -69,7 +67,7 @@ class Salt
     @amount = 0.0
   end
 
-  def pinch amn
+  def pinch(amn)
     @amount = amn
   end
 
@@ -82,12 +80,12 @@ class Potato
   attr_reader :amount
   attr_accessor :cut
 
-  def initialize cut_type = :cubes
+  def initialize(cut_type = :cubes)
     @cut = cut_type
     @amount = 0.0
   end
 
-  def load= amn
+  def load=(amn)
     @amount = amn
     add_to_mix
   end
@@ -101,7 +99,7 @@ class Onion
   attr_reader :quantity
   attr_writer :color
 
-  def initialize color = :white
+  def initialize(color = :white)
     @quantity = 1
     @color = color
   end
@@ -110,21 +108,21 @@ class Onion
     @color.to_s.capitalize
   end
 
-  def cut_and_add amn
-    @amount = amn    
+  def cut_and_add(amn)
+    @amount = amn
     puts "#{color} onion (#{quantity}) is cut"
     add
   end
 
   def add
-    puts "Prepared onion is added to the mix"
+    puts 'Prepared onion is added to the mix'
   end
 end
 
 class Carrot
   attr_reader :cut
 
-  def initialize quantity = 1, cut = :cubes
+  def initialize(quantity = 1, cut = :cubes)
     @quantity = quantity
     @cut = cut
   end
@@ -139,7 +137,7 @@ class Carrot
 end
 
 class Butter
-  def initialize amount = 1.0
+  def initialize(amount = 1.0)
     @amount = amount
   end
 

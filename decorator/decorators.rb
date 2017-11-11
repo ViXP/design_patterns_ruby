@@ -4,17 +4,17 @@ require './component'
 class TextMessageDecorator
   attr_reader :context
 
-  def initialize text_message_obj
+  def initialize(text_message_obj)
     @context = text_message_obj
   end
 
-  [:text_message, :time].each do |mth|
+  %i[text_message time].each do |mth|
     define_method mth do
       decorate(@context.send(mth))
     end
   end
 
-  [:importance_level, :invokers, :radiation_level].each do |mth|
+  %i[importance_level invokers radiation_level].each do |mth|
     define_method mth do
       @context.send(mth)
     end
@@ -45,15 +45,17 @@ class TextMessageDecorator
     TEXT
   end
 
-  private 
+  private
 
-  def decorate value
+  def decorate(value)
     value
   end
 
-  def decorate_recursively context, value
+  def decorate_recursively(context, value)
     if context.respond_to?(:decorate, true)
-      context.send(:decorate, decorate_recursively(context.send(:context), value))
+      context.send(
+        :decorate, decorate_recursively(context.send(:context), value)
+      )
     else
       value
     end
@@ -73,12 +75,12 @@ class LowLevelTextMessageDecorator < TextMessageDecorator
   end
 
   def invokers
-    super() + [:suspicion_detection_system]
+    super() + %i[suspicion_detection_system]
   end
 
   private
 
-  def decorate val
+  def decorate(val)
     "\e[2m~~~ #{val} ~~~\e[0m"
   end
 end
@@ -86,7 +88,7 @@ end
 class NormalLevelTextMessageDecorator < TextMessageDecorator
   private
 
-  def decorate val
+  def decorate(val)
     "\e[37m #{val} \e[0m"
   end
 end
@@ -106,7 +108,7 @@ class AbnormalLevelTextMessageDecorator < TextMessageDecorator
 
   private
 
-  def decorate val
+  def decorate(val)
     "\e[4m\e[32m #{val} \e[0m"
   end
 end
@@ -126,7 +128,7 @@ class HighLevelTextMessageDecorator < TextMessageDecorator
 
   private
 
-  def decorate val
+  def decorate(val)
     "\e[1m\e[33m!!!  #{val}  !!!\e[0m"
   end
 end
@@ -144,9 +146,9 @@ class CatastrophicLevelTextMessageDecorator < TextMessageDecorator
     super() + [:evacuation_system]
   end
 
-  private 
+  private
 
-  def decorate val
+  def decorate(val)
     "\e[5m\e[31m☣    #{val}    ☣\e[0m"
   end
 end

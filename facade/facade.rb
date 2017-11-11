@@ -11,15 +11,15 @@ class KitchenFacade
     carrot = Carrot.new(1, :frayed)
     # Full recipe
     Cook.start_cooking :soup
-    Cook.get_pan
+    Cook.use_pan
     water.pour 2
     water.boil
-    Cook.get_dripping_pan
+    Cook.use_dripping_pan
     onion.cut_and_add 1
     carrot.add_to_mix
     Cook.mix
     Cook.wait_for 5
-    Cook.get_pan
+    Cook.use_pan
     water.fill_in
     potato.load = 0.2
     Cook.mix
@@ -41,10 +41,10 @@ class KitchenFacade
     salt = Salt.new
     # Full recipe
     Cook.start_cooking 'mashed potatoes'
-    Cook.get_dripping_pan
+    Cook.use_dripping_pan
     onion.cut_and_add 1
     Cook.wait_for 5
-    Cook.get_pan
+    Cook.use_pan
     water.pour 1.5
     water.fill_in
     potato.load = 1

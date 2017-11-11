@@ -2,7 +2,9 @@
 require './originator'
 require './memento'
 
-class ChapterCaretaker < CaretakerOriginatorInterface
+class ChapterCaretaker
+  include CaretakerOriginatorCommon
+
   def initialize
     @versions = []
     @originator = ChapterOriginator.new

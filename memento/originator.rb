@@ -2,7 +2,7 @@
 require './caretaker'
 require './memento'
 
-class CaretakerOriginatorInterface
+module CaretakerOriginatorCommon
   [:get_state, :set_state, :save_state, :restore].each do |mth|
     define_method(:mth) do |*args|
       raise NotImplementedError, 'Please, redeclare this method in a child class, don\'t use the abstract method!'
@@ -11,7 +11,9 @@ class CaretakerOriginatorInterface
 end
 
 # CONCRETE ORIGINATOR
-class ChapterOriginator < CaretakerOriginatorInterface
+class ChapterOriginator 
+  include CaretakerOriginatorCommon
+
   def initialize
     @current_header = ''
     @current_text = ''

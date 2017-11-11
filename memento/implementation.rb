@@ -3,8 +3,8 @@
 # of saved states and restore the previous states if he needs to.
 # 
 # MEMENTO TextChunk
-# CARETAKER CaretakerOriginatorInterface: ChapterCaretaker
-# ORIGINATOR CaretakerOriginatorInterface: ChapterOriginator
+# CARETAKER ChapterCaretaker
+# ORIGINATOR ChapterOriginator
 
 require './caretaker'
 

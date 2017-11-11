@@ -15,20 +15,20 @@ class Drawer
   end
 
   def self.undo_break_line
-    system('clear')
-    temp = $OUTPUT.clone.chomp
+    Stream.clear
+    temp = Stream.output.clone.chomp
     print temp
-    $OUTPUT = temp
+    Stream.output = temp
   end
 
   def self.undo_print_symbol
     print "\b \b"
-    $OUTPUT = $OUTPUT[0...-4]
+    Stream.output = Stream.output[0...-4]
   end
 
-  def self.print arg
+  def self.print(arg)
     super arg
-    $OUTPUT += arg.to_s
+    Stream.output += arg.to_s
   end
 
   private_methods :new

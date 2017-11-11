@@ -2,12 +2,12 @@
 require './component'
 
 class MovieCategory < MovieComponent
-  def initialize *args
-    super *args
+  def initialize(*args)
+    super(*args)
     @children = []
   end
 
-  def add component
+  def add(component)
     if component.is_a? MovieComponent
       @children << component
     elsif component.is_a? Array
@@ -17,7 +17,7 @@ class MovieCategory < MovieComponent
     end
   end
 
-  def remove component = MovieComponent.new
+  def remove(component = MovieComponent.new)
     @children.delete component
   end
 

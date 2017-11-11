@@ -4,14 +4,15 @@ require './component'
 class Movie < MovieComponent
   attr_reader :year
 
-  def initialize title, year = 1900, plot = ''
+  def initialize(title, year = 1900, plot = '')
     super title, plot
     @year = year
-    @rented
+    @rented = false
   end
 
   def show_info
-    puts "Title: #{title}\nYear: #{year}\nPlot:#{plot}\nAvailable:#{available?}\n\n"
+    puts "Title: #{title}\nYear: #{year}\nPlot: #{plot}\n" \
+    "Available: #{available?}\n\n"
   end
 
   def rent!
@@ -22,5 +23,5 @@ class Movie < MovieComponent
     @rented ? 'no' : 'yes'
   end
 
-  alias :plot :description
+  alias plot description
 end

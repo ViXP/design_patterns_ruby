@@ -2,18 +2,18 @@
 class EditorialOrder
   attr_reader :sections
 
-  def initialize *sections
+  def initialize(*sections)
     @sections = [*sections]
     @magazine = []
   end
 
-  def << article
+  def <<(article)
     return false unless article.is_a? Hash
     @magazine << article
   end
 
-  def >> section
-    @sections.delete_at(@sections.index(section) || @sections.size + 1)
+  def >>(other)
+    @sections.delete_at(@sections.index(other) || @sections.size + 1)
   end
 
   def to_s

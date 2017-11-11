@@ -1,20 +1,38 @@
-# Simple pseudographical editor which can execute commands
-# specified by user input, undo them and redo them.
-# 
-# RECEIVERS Drawer: TopLeftCornerDrawer, TopRightCornerDrawer, BottomLeftCornerDrawer, BottomRightCornerDrawer, HorizontalLineDrawer, VerticalLineDrawer, SolidFillDrawer, SpotFillDrawer
-# COMMANDS DrawerCommand: SymbolDrawerCommand, SpaceDrawerCommand, BreakLineDrawerCommand
+# Simple pseudographical editor which can execute commands specified by user
+# input, undo them and redo them.
+#
+# RECEIVERS Drawer: TopLeftCornerDrawer, TopRightCornerDrawer,
+#           BottomLeftCornerDrawer, BottomRightCornerDrawer, SpotFillDrawer,
+#           HorizontalLineDrawer, VerticalLineDrawer, SolidFillDrawer
+# COMMANDS DrawerCommand: SymbolDrawerCommand, SpaceDrawerCommand,
+#          BreakLineDrawerCommand
 # INVOKER CommandInvoker
+
+# Singleton terminal output object (helps implement break line undoying):
+class Stream
+  @output = ''
+
+  class << self
+    attr_accessor :output
+  end
+
+  def self.clear
+    system('clear')
+  end
+
+  private_methods :new
+end
 
 require 'io/console'
 require './invoker'
 require './receivers'
 
-system('clear') # clears screen for a proper view
-$OUTPUT = '' # global terminal output object (helps implement break line undoying)
+Stream.clear # clears screen for a proper view
 
-def puts arg # declares the puts method in current context to log to output object
+# Declares the puts method in current context to log to output object:
+def puts(arg)
   super arg
-  $OUTPUT += arg.to_s
+  Stream.output += arg.to_s
 end
 
 puts <<~TEXT # instructions to operate the commands
@@ -25,7 +43,7 @@ puts <<~TEXT # instructions to operate the commands
   q - ╔
   w - ═
   e - ╗
-  a - ║2  
+  a - ║2
   s - ▓
   d - ░
   z - ╚
@@ -33,14 +51,14 @@ puts <<~TEXT # instructions to operate the commands
   c - ╝
   u - undo operation
   r - redo operation
-  space, 
-  enter, 
-  return, 
+  space,
+  enter,
+  return,
   esc - as usual
   --------------------------\n
 TEXT
 
-while sym = STDIN.getch # command will be invoked depending on the user input
+while (sym = STDIN.getch) # command will be invoked depending on the user input
   case sym
   when 'u', "\u007F"
     CommandInvoker.undo
@@ -67,7 +85,7 @@ while sym = STDIN.getch # command will be invoked depending on the user input
   when "\r"
     CommandInvoker.invoke(BreakLineDrawerCommand.new)
   when "\e"
-    system('clear')
+    Stream.clear
     exit
   end
 end

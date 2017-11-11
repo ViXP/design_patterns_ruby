@@ -4,16 +4,22 @@ require './receivers'
 class DrawerCommand
   attr_reader :receiver
 
-  def initialize receiver = Drawer
+  def initialize(receiver = Drawer)
     @receiver = receiver
   end
 
   def execute
-    raise NotImplementedError, 'Please, redeclare this method in a child class, don\'t use the abstract method!'
+    raise(
+      NotImplementedError,
+      'Redeclare this method in a child class, don\'t use the abstract method!'
+    )
   end
 
   def undo
-    raise NotImplementedError, 'Please, redeclare this method in a child class, don\'t use the abstract method!'
+    raise(
+      NotImplementedError,
+      'Redeclare this method in a child class, don\'t use the abstract method!'
+    )
   end
 end
 

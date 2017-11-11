@@ -15,7 +15,7 @@ class SecuredTerminal
       Please, specify the next public password for all subscribed clients:
     TEXT
     @password = gets
-    self.send_pass!
+    send_pass!
   end
 
   def self.send_pass!

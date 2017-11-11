@@ -4,13 +4,13 @@ require './iterators'
 class Catalog
   attr_reader :items, :title, :on_page
 
-  def initialize title, items = [], on_page = 3
+  def initialize(title, items = [], on_page = 3)
     @title = title
     @items = items
     @on_page = on_page
   end
 
-  def << item = Item.new
+  def <<(item = Item.new)
     @items << item
   end
 
@@ -18,7 +18,7 @@ class Catalog
     "#{title} catalog:\n#{'*' * (title.size + 9)}"
   end
 
-  def iterator type = false
+  def iterator(type = false)
     if type == :item
       ItemIterator.new(self)
     else
@@ -30,16 +30,20 @@ end
 class Item
   attr_reader :code, :brand, :title, :price, :currency, :description
 
-  @@current_code = 10000
+  @current_code = 10_000
 
-  def initialize brand, title, price, currency = '$', description = ''
-    @@current_code += 1
-    @code = @@current_code
+  class << self
+    attr_accessor :current_code
+  end
+
+  def initialize(brand, title, price, currency = '$', description = '')
+    self.class.current_code += 1
+    @code = self.class.current_code
     @brand = brand
     @title = title
     @price = price
     @description = description
-    @currency = currency 
+    @currency = currency
   end
 
   def price
@@ -47,7 +51,8 @@ class Item
   end
 
   def to_s
-    "Brand: #{brand}\nTitle: #{title} (code: #{code})\nDescription: #{description}\nPrice: #{price}\n\n"
+    "Brand: #{brand}\nTitle: #{title} (code: #{code})\n" \
+    "Description: #{description}\nPrice: #{price}\n\n"
   end
 
   private :currency

@@ -1,6 +1,6 @@
 # ABSTRACT ITERATOR
 class Iterator
-  def initialize aggregate
+  def initialize(aggregate)
     @subject = aggregate
     @position = 0
   end
@@ -11,21 +11,23 @@ class Iterator
   end
 
   def previous
-    @position -= 1 if @position > 0
+    @position -= 1 if @position.positive?
     return_subject
   end
 
   def previous?
-    @position > 0
+    @position.positive?
   end
 
   def current
     return_subject
   end
 
-  [:next, :last, :next?, :return_subject].each do |mth|
+  %i[next last next? return_subject].each do |mth|
     define_method(mth) do
-      raise NotImplementedError, 'Please, redeclare this method in a child class, don\'t use the abstract method!'
+      raise(NotImplementedError,
+            'Redeclare this method in a child class, don\'t use the abstract ' \
+            'method!')
     end
   end
 
@@ -56,12 +58,12 @@ class ItemIterator < Iterator
 end
 
 class PageIterator < Iterator
-  def initialize aggregate, onpage = 5
+  def initialize(aggregate, onpage = 5)
     super aggregate
     @on_page = onpage
   end
 
-  def next 
+  def next
     @position += 1 if (@position + 1) * @on_page < @subject.items.size
     return_subject
   end
@@ -79,7 +81,8 @@ class PageIterator < Iterator
 
   def return_subject
     str = ''
-    @subject.items[@position*@on_page..@position*@on_page + @on_page].each {|item| str += item.to_s}
+    range = ((@position * @on_page)..(@position * @on_page + @on_page))
+    @subject.items[range].each {|item| str += item.to_s}
     "#{@subject}\n#{str}"
   end
 end

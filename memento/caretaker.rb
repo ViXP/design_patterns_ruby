@@ -16,11 +16,11 @@ class ChapterCaretaker
     history
   end
 
-  def get_state
-    @originator.get_state
+  def show_state
+    @originator.show_state
   end
 
-  def set_state header, text
+  def set_state(header, text)
     @originator.set_state header, text
   end
 
@@ -28,13 +28,13 @@ class ChapterCaretaker
     @originator.save_state self
   end
 
-  def restore version = false
-    chunk = (@versions.detect{|c| c.object_id == version.to_i} || false) if version
+  def restore(vers = false)
+    chunk = (@versions.detect{|c| c.object_id == vers.to_i} || false) if vers
     @versions.delete(chunk) if chunk
     @originator.restore chunk || @versions.pop
   end
 
-  def << chunk
+  def <<(chunk)
     @versions.push(chunk) if chunk.is_a? TextChunk
   end
 end

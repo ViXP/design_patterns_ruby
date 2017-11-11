@@ -4,20 +4,20 @@ require 'singleton'
 
 class PasswordSendingMachine
   include Singleton
-  
+
   @clients = []
 
-  def self.register client
-    @clients.push(client) if client.is_a?(Client) && !@clients.include?(client) 
+  def self.register(client)
+    @clients.push(client) if client.is_a?(Client) && !@clients.include?(client)
   end
 
-  def self.unregister client
+  def self.unregister(client)
     @clients.delete(client) if client.is_a? Client
   end
 
-  def self.notify! data
+  def self.notify!(data)
     threads = []
-    @clients.each do |client| 
+    @clients.each do |client|
       threads << Thread.new { client.update(data) }
     end
     threads.each {|thr| thr.join }

@@ -4,34 +4,38 @@ require 'digest'
 class Client
   def initialize
     @password = ''
-    @color_code = @color_code || 39
+    @color_code ||= 39
     generate_pass @password
     connect
   end
 
   def connect
     PasswordSendingMachine.register(self)
-    puts "\e[#{@color_code}m#{self.class.name} (#{self.object_id}) connected.\e[0m"
+    puts "\e[#{@color_code}m#{self.class.name} (#{object_id}) " \
+    'connected.\e[0m'
   end
 
   def disconnect
     PasswordSendingMachine.unregister(self)
-    puts "#{self.class.name} (#{self.object_id}) disconnected."
+    puts "#{self.class.name} (#{object_id}) disconnected."
   end
 
-  def update data
+  def update(data)
     old_pass = @password
     generate_pass data
     puts <<-TEXT
-      \e[#{@color_code}mI am the #{self.class.name} (#{self.object_id}).
+      \e[#{@color_code}mI am the #{self.class.name} (#{object_id}).
       My old private password was: #{old_pass}.
-      I have received the new public password: #{data.tr("\n", '')}. 
+      I have received the new public password: #{data.tr("\n", '')}.
       My new private password now is: #{@password}\n\e[0m
     TEXT
   end
 
-  def generate_pass password
-    raise NotImplementedError, 'Please, redeclare this method in a child class, don\'t use the abstract method!'
+  def generate_pass(*)
+    raise(
+      NotImplementedError,
+      'Redeclare this method in a child class, don\'t use the abstract method!'
+    )
   end
 end
 
@@ -42,8 +46,8 @@ class Base64Client < Client
     super
   end
 
-  def generate_pass password
-    @password = Digest::SHA256.base64digest(password + self.object_id.to_s)
+  def generate_pass(password)
+    @password = Digest::SHA256.base64digest(password + object_id.to_s)
   end
 end
 
@@ -53,8 +57,8 @@ class SHA256Client < Client
     super
   end
 
-  def generate_pass password
-    @password = Digest::SHA256.new.digest(password + self.object_id.to_s)
+  def generate_pass(password)
+    @password = Digest::SHA256.new.digest(password + object_id.to_s)
   end
 end
 
@@ -64,8 +68,8 @@ class HEXClient < Client
     super
   end
 
-  def generate_pass password
-    @password = Digest::SHA256.hexdigest(password + self.object_id.to_s)
+  def generate_pass(password)
+    @password = Digest::SHA256.hexdigest(password + object_id.to_s)
   end
 end
 
@@ -75,7 +79,7 @@ class MD5Client < Client
     super
   end
 
-  def generate_pass password 
-    @password = Digest::MD5.new.update(password + self.object_id.to_s)
+  def generate_pass(password)
+    @password = Digest::MD5.new.update(password + object_id.to_s)
   end
 end

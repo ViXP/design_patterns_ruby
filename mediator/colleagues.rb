@@ -2,20 +2,23 @@
 require './mediator'
 
 class AbstractColleague
-  def initialize *args
+  def initialize(*)
     register_mediator
   end
 
   private
 
   def register_mediator
-    raise NotImplementedError, 'Please, redeclare this method in a child class, don\'t use the abstract method!'
+    raise(
+      NotImplementedError,
+      'Redeclare this method in a child class, don\'t use the abstract method!'
+    )
   end
 end
 
 # CONCRETE COLLEAGUES
 class Product < AbstractColleague
-  def initialize title = '', price = '10'
+  def initialize(title = '', price = '10')
     super
     @title = title
     @price = price
@@ -49,14 +52,18 @@ class Product < AbstractColleague
 end
 
 class Storage < AbstractColleague
-  @@storage_count = 0
+  @storage_count = 0
+
+  class << self
+    attr_accessor :storage_count
+  end
 
   attr_reader :products
 
-  def initialize address = false, places = 250
+  def initialize(address = false, places = 250)
     super
-    @@storage_count += 1
-    @number = @@storage_count
+    self.class.storage_count += 1
+    @number = self.class.storage_count
     @products_count = 0
     @places = places
     @products = []
@@ -76,12 +83,12 @@ class Storage < AbstractColleague
     LogisticsMachine.liquidate self
   end
 
-  def pickup product
+  def pickup(product)
     return false unless @products.delete(product)
     @products_count -= 1
   end
 
-  def store product
+  def store(product)
     return false if @products_count >= @places
     @products << product
     @products_count += 1

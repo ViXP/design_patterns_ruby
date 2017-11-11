@@ -10,12 +10,13 @@ class TobaccoMixture
     @similar_products = []
   end
 
-  def << component = Tobacco.new
+  def <<(component = Tobacco.new)
     @secondary_components << component
   end
 
   def aroma
-    @main_component.aroma + (@secondary_components.empty? ? '' : " with notes of " + components_aroma)
+    @main_component.aroma + \
+    (@secondary_components.empty? ? '' : " with notes of #{components_aroma}")
   end
 
   def main_component
@@ -23,9 +24,9 @@ class TobaccoMixture
   end
 
   def components
-    description = ''
-    @secondary_components.each {|comp| description = description + component_to_string(comp) }
-    description
+    desc = ''
+    @secondary_components.each {|comp| desc += component_to_string(comp) }
+    desc
   end
 
   def weight
@@ -36,12 +37,12 @@ class TobaccoMixture
 
   def recipe
     puts <<~RECIPE
-      #{self.name} (#{self.weight} g)
-      --------------------
+      #{name} (#{weight} g)
+      ---------------------
       Main component: #{main_component}
       #{"Secondary components:\n#{components}" unless @secondary_components.empty?}
       Aroma: #{aroma}
-      The similar products on the market: 
+      The similar products on the market:
       #{similar_products}
     RECIPE
   end
@@ -52,9 +53,9 @@ class TobaccoMixture
     prods
   end
 
-  private 
+  private
 
-  def component_to_string component = Tobacco.new
+  def component_to_string(component = Tobacco.new)
     component.name + " -- #{component.color} color (#{component.weight} g);\n"
   end
 
@@ -69,16 +70,18 @@ end
 class TobaccoPipe
   attr_reader :title, :model, :description
 
-  def initialize title, model, description
-    @title, @model, @description = title, model, description
+  def initialize(title, model, description)
+    @title = title
+    @model = model
+    @description = description
   end
 
   def specifications
     puts <<~SPECS
-      #{self.title} (#{self.model})
+      #{title} (#{model})
       -----------------------------
-      Pipe description: 
-      #{self.description}
+      Pipe description:
+      #{description}
     SPECS
   end
 end

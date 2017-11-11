@@ -2,7 +2,7 @@
 class Tobacco
   attr_reader :name, :color, :aroma, :weight
 
-  private 
+  private
 
   def set_weight
     puts "Input the weight in gramms of #{name} in a new blend:"
@@ -15,8 +15,8 @@ end
 # CONCRETE COMPONENTS
 class Virginia < Tobacco
   def initialize
-    @name = @name || 'Flue-cured Virginia'
-    @color =  'yellow to orange'
+    @name ||= 'Flue-cured Virginia'
+    @color = 'yellow to orange'
     @aroma = 'bright, caramel sweet'
     set_weight
   end
@@ -24,8 +24,8 @@ end
 
 class Burley < Tobacco
   def initialize
-    @name = @name || 'Light air-cured Burley'
-    @color =  'red to brown'
+    @name ||= 'Light air-cured Burley'
+    @color = 'red to brown'
     @aroma = 'high-nicotine, bitter, dry, full, nutty'
     set_weight
   end
@@ -33,7 +33,7 @@ end
 
 class Oriental < Tobacco
   def initialize
-    @name = @name || 'Oriental tobaccos'
+    @name ||= 'Oriental tobaccos'
     @aroma = 'spicy, sweet, exotic, various'
     @color = 'yellow to brown'
     set_weight
@@ -45,7 +45,8 @@ class Cavendish < Virginia
     @name = 'Danish flavored Cavendish'
     super
     @color = 'brown to black'
-    @aroma += ', moist textured, fresh, plum-like, chocolate, coconut, rum or vanilla taste'
+    @aroma += ', moist textured, fresh, plum-like, chocolate, coconut, rum, ' \
+    'vanilla taste'
   end
 end
 
@@ -61,7 +62,7 @@ end
 class Perique < Burley
   def initialize
     @name = 'Perique'
-    super    
+    super
     @aroma = 'frutty, heady, with whiskey flavor'
   end
 end

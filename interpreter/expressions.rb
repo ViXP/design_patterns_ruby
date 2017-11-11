@@ -2,34 +2,44 @@
 require './context'
 
 class Expression
-  def initialize context
+  def initialize(context)
     @context = context
     set_initial_context
   end
 
   def interprete
-    raise NotImplementedError, 'Please, redeclare this method in a child class, don\'t use the abstract method!'
+    raise(
+      NotImplementedError,
+      'Redeclare this method in a child class, don\'t use the abstract method!'
+    )
   end
 
   private
 
   def set_initial_context
-    unless @context == Context
-      Context.current_type = @context.include?('.') || @context.include?('-') ? :mor : :eng
-      Context.current_data = @context.split('translate to')[0].chomp(' ')
-      @context = Context
-    end
+    return @context if @context == Context
+    Context.current_type =
+      if @context.include?('.') || @context.include?('-')
+        :mor
+      else
+        :eng
+      end
+    Context.current_data = @context.split('translate to')[0].chomp(' ')
+    @context = Context
   end
 end
 
 # CONCRETE COMPOUND EXPRESSION
 class TranslaterExpression < Expression
-  def initialize context
+  def initialize(context)
     super context
-    if context.include? 'translate to'
-      @interpreter = context[-3..-1].downcase == 'mor' ? MorzeExpression.new(@context) : EngExpression.new(@context)
+    unless context.include?('translate to')
+      raise(ArgumentError, 'Specify `translate to` or terminal expression!')
+    end
+    if context[-3..-1].downcase == 'mor'
+      @interpreter = MorzeExpression.new(@context)
     else
-      raise ArgumentError, 'Please, specify `translate to` expression or use terminal expressions!'
+      @interpreter = EngExpression.new(@context)
     end
   end
 

@@ -1,17 +1,23 @@
 # CONCRETE FLYWEIGHT
 class Ant
-  @@quantity = 0
+  @quantity = 0
+
+  class << self
+    attr_accessor :quantity
+
+    alias count quantity
+  end
 
   attr_reader :binomial_name, :codename
 
-  def initialize codename, *args
-    @@quantity += 1
+  def initialize(codename)
+    self.class.quantity += 1
     @codename = codename
     find_by_code
     read_genome
   end
 
-  def to_s size = '', behaviour = ''
+  def to_s(size = '', behaviour = '')
     <<~ANALYSIS
       Binomial name: #{binomial_name}
       Codename: #{codename}
@@ -26,27 +32,16 @@ class Ant
     @genome.slice(0, 40) + '...'
   end
 
-  def self.count
-    @@quantity
-  end
-
   private
 
   def find_by_code
-    case @codename 
-    when :red
-      @binomial_name = 'Acromyrmex echinatior'
-      @genome_file = './genomes/acromyrmex'
-    when :brown
-      @binomial_name = 'Atta cephalotes'
-      @genome_file = './genomes/atta'
-    when :yellow
-      @binomial_name = 'Cardiocondyla obscurior'
-      @genome_file = './genomes/cardiocondyla'
-    else
-      @binomial_name = 'Camponotus floridanus'
-      @genome_file = './genomes/camponotus'
-    end
+    @binomial_name, @genome_file =
+      case @codename
+      when :red then ['Acromyrmex echinatior', './genomes/acromyrmex']
+      when :brown then ['Atta cephalotes', './genomes/atta']
+      when :yellow then ['Cardiocondyla obscurior', './genomes/cardiocondyla']
+      else ['Camponotus floridanus', './genomes/camponotus']
+      end
   end
 
   def read_genome

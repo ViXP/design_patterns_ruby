@@ -2,7 +2,7 @@
 class BookConstructor
   attr_reader :title, :leaf_material, :front_cover, :cover_material
 
-  def initialize title
+  def initialize(title)
     @title = title
     @front_cover = ''
     @cover_material = ''
@@ -12,14 +12,14 @@ class BookConstructor
 
   def assemble
     print_cover
-    cut_boards if has_multilayer_cover
-    glue_cover_layers if has_multilayer_cover
+    cut_boards if multilayer_cover?
+    glue_cover_layers if multilayer_cover?
     print_signatures
     cut_and_sew_signatures
     glue_signatures
     glue_all
-    assemble_endpapers if has_endpapers
-    decorate if has_decorations
+    assemble_endpapers if endpapers?
+    decorate if decorations?
     puts "\e[32mDONE!\e[0m"
   end
 
@@ -61,17 +61,17 @@ class BookConstructor
     puts "Assembling the decorations: #{str}"
   end
 
-  private 
+  private
 
   # Hooks
-  [:has_multilayer_cover, :has_endpapers, :has_decorations].each do |mth|
+  %i[multilayer_cover? endpapers? decorations?].each do |mth|
     define_method(mth) { true }
   end
 end
 
 # CONCRETE CLASSES
 class CheapBookConstructor < BookConstructor
-  def initialize title
+  def initialize(title)
     super title
     @front_cover = 'glance paper'
     @leaf_material = 'thin offset paper'
@@ -79,21 +79,21 @@ class CheapBookConstructor < BookConstructor
 
   private
 
-  def has_multilayer_cover
+  def multilayer_cover?
     false
   end
 
-  def has_decorations
+  def decorations?
     false
   end
 
-  def has_endpapers
+  def endpapers?
     false
   end
 end
 
 class StandardBookConstructor < BookConstructor
-  def initialize title
+  def initialize(title)
     super title
     @cover_material = 'carton'
     @leaf_material = 'offset paper'
@@ -101,13 +101,13 @@ class StandardBookConstructor < BookConstructor
 
   private
 
-  def has_decorations
+  def decorations?
     false
   end
 end
 
 class ExpensiveBookConstructor < BookConstructor
-  def initialize title
+  def initialize(title)
     super title
     @front_cover = :leather
     @cover_material = :wood

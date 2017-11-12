@@ -1,8 +1,8 @@
-# The new worker of laboratory can have one of the three
-# levels of access, which depends on his job. Each level
-# allows performing сertain actions and denies other. Every
-# hardworking worker can increase his level of trust (and vice versa).
-# 
+# The new worker of laboratory can have one of the three levels of access, which
+# depends on his job. Each level allows performing certain actions and denies
+# other. Every hardworking worker can increase his level of trust (and vice
+# versa).
+#
 # CONTEXT LaboratoryWorker
 # STATES AuthorizationLevel: WorkerLevel, EngineerLevel, ScientistLevel
 
@@ -18,7 +18,7 @@ john = LaboratoryWorker.new('John Linden') # creating the context
   john.analyze_costs # will work with first state
   john.fix_communication_error # will work with second, third states
   john.interact_with_matter # will work with third state
-  john.get_salary # common methods
+  john.show_salary # common methods
   john.total_earned
   john.increase_level # state changes to next one
 end

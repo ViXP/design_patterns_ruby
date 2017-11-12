@@ -2,7 +2,7 @@
 # several types of component classes with different methods and responsibility
 #
 # FACADE KitchenFacade
-# CLASSES Cook, Water, Salt, Potato, Onion, Carrot, Butter 
+# CLASSES Cook, Water, Salt, Potato, Onion, Carrot, Butter
 
 require './facade'
 

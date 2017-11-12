@@ -2,13 +2,13 @@
 require './product'
 
 class MarketingCampaignPlanPrototype
-  @@subject = MarketingCampaignPlan.new
+  @subject = MarketingCampaignPlan.new
 
   define_singleton_method :'=~' do |new_proto|
-    @@subject = new_proto if new_proto.is_a?(MarketingCampaignPlan)
+    @subject = new_proto if new_proto.is_a?(MarketingCampaignPlan)
   end
 
   def self.new
-    @@subject.clone
+    @subject.clone
   end
 end

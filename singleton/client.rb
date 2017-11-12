@@ -2,14 +2,14 @@
 require './singleton'
 
 class Subscriber
-  def initialize fl_name = nil, ph = nil
+  def initialize(full_nm = nil, ph = nil)
     @book = PhoneBook.new
-    self.full_name = fl_name
+    self.full_name = full_nm
     self.phone = ph
     @book << self
   end
 
-  [:full_name, :phone].each do |var|
+  %i[full_name phone].each do |var|
     define_method "#{var}=" do |val = nil|
       if val && val.is_a?(String)
         instance_variable_set "@#{var}", val
@@ -25,6 +25,6 @@ class Subscriber
   end
 
   def phone_formatted
-    "#{self.phone.slice(0,3)}-#{self.phone.slice(3,2)}-#{self.phone.slice(5,2)}"
+    "#{phone.slice(0, 3)}-#{phone.slice(3, 2)}-#{phone.slice(5, 2)}"
   end
 end

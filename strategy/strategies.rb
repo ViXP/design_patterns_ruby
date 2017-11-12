@@ -3,9 +3,12 @@ class ReadingAbility
   def reading_ability
     puts 'Reading ability: ' + self.class.name
   end
-  
+
   def read!
-    raise NotImplementedError, 'Please, redeclare this method in child class, don`t use the abstract method!'
+    raise(
+      NotImplementedError,
+      'Redeclare this method in child class, don`t use the abstract method!'
+    )
   end
 end
 

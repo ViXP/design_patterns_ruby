@@ -2,7 +2,7 @@
 require './visitors'
 
 module Visitable
-  def accept visitor
+  def accept(visitor)
     visitor.visit(self) if visitor.respond_to? :visit
   end
 end
@@ -10,7 +10,7 @@ end
 module Purchasable
   attr_accessor :bought
 
-  def bought 
+  def bought
     @bought || false
   end
 end
@@ -23,15 +23,15 @@ class Weapon
   attr_reader :brand, :description, :package_type
   attr_accessor :department, :material, :stock_material, :made_in, :price
 
-  def initialize brand, department, description, material, stock_material, made_in, package_type = :plastic, price
+  def initialize(brand, department, specifications, package_type, price)
     @brand = brand
     @department = department
-    @description = description
-    @material = material
-    @stock_material = stock_material
-    @made_in = made_in
+    @description = specifications[:description] || ''
+    @material = specifications[:material] || :steel
+    @stock_material = specifications[:stock_material] || :plastic
+    @made_in = specifications[:made_in]
     @price = price
-    @package_type = package_type
+    @package_type = package_type || :plastic
   end
 end
 
@@ -41,7 +41,7 @@ class Dinnerware
 
   attr_reader :type, :color, :number_of_pieces, :price_per_product
 
-  def initialize type, color, number_of_pieces, price_per_product
+  def initialize(type, color, number_of_pieces, price_per_product)
     @type = type
     @color = color
     @number_of_pieces = number_of_pieces

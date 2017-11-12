@@ -1,10 +1,10 @@
 # ABSTRACT CONTEXT
 require './strategies'
 
-class Man 
+class Man
   attr_writer :name
 
-  def initialize name
+  def initialize(name)
     @ability = ReadingAbility.new
     self.name = name
   end
@@ -21,33 +21,33 @@ class Man
     @ability.reading_ability
   end
 
-  def change_ability action
+  def change_ability(action)
     @ability = action if action.is_a? ReadingAbility
   end
 end
 
 # CONCRETE CONTEXTS
 class Child < Man
-  def initialize name
+  def initialize(name)
     super(name)
     @ability = CantRead.new
   end
 end
 
 class BlindMan < Man
-  def initialize name
+  def initialize(name)
     super(name)
     @ability = CantEverRead.new
   end
 
   def see_the_light!
-    self.change_ability LearnRead.new
-    self.please_read
+    change_ability LearnRead.new
+    please_read
   end
 end
 
 class Grown < Man
-  def initialize name
+  def initialize(name)
     super(name)
     @ability = CanRead.new
   end

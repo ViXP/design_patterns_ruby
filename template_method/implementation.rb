@@ -1,8 +1,8 @@
-# The publisher can create three types of book,
-# user specifies which kind of book he wants to create and
-# uses the template method for it.
-# 
-# CLASSES BookConstructor: CheapBookConstructor, StandardBookConstructor, ExpensiveBookConstructor
+# The publisher can create three types of book, user specifies which kind of
+# book he wants to create and uses the template method for it.
+#
+# CLASSES BookConstructor: CheapBookConstructor, StandardBookConstructor,
+#         ExpensiveBookConstructor
 
 require './classes'
 

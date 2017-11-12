@@ -1,16 +1,20 @@
-# CEO of average software development company decided to make the marketing campaign plan
-# for his new GPS-navigator product. He came up with several ideas, and throw it for the
-# brainstorm to two of his top manamgers. The one, who will come with better ideas will
-# get his salary increase. The final version of plan will be revised and approved by CFO.
-# 
+# CEO of average software development company decided to make the marketing
+# campaign plan for his new GPS-navigator product. He came up with several
+# ideas, and throw it for the brainstorm to two of his top manamgers. The one,
+# who will come with better ideas will get his salary increase. The final
+# version of plan will be revised and approved by CFO.
+#
 # PROTOTYPE MarketingCampaignPlanPrototype
 # PRODUCT MarketingCampaignPlan
 # COMPONENT MarketingCampaignPhase
 
 require './prototype'
 
-director_campaign = MarketingCampaignPlanPrototype.new # the first product of 'blank' prototype
-director_campaign.title = 'New GPS-navigator application for mobile devices' # setting the new data
+# The first product of 'blank' prototype:
+director_campaign = MarketingCampaignPlanPrototype.new
+
+# Setting the new data:
+director_campaign.title = 'New GPS-navigator application for mobile devices'
 director_campaign << MarketingCampaignPhase.new({
   title: 'TV advertisements',
   goal: 'Get potential customers informed',
@@ -28,10 +32,16 @@ director_campaign << MarketingCampaignPhase.new({
   actual_costs: 28_000,
   complete: true
 })
-MarketingCampaignPlanPrototype =~ director_campaign # the product becomes a new prototype
 
-manager1_campaign = MarketingCampaignPlanPrototype.new # the second product of first product prototype
-manager1_campaign[2] = {title: 'GOOGLE and Yahoo context advertising', planned_costs: 600_000, complete: false} # editing of cloned property
+# The product becomes a new prototype:
+MarketingCampaignPlanPrototype =~ director_campaign
+
+# The second product of first product prototype
+manager1_campaign = MarketingCampaignPlanPrototype.new
+manager1_campaign[2] = {
+  title: 'GOOGLE and Yahoo context advertising',
+  planned_costs: 600_000, complete: false
+} # editing the cloned property
 manager1_campaign << MarketingCampaignPhase.new({
   title: 'Contracts with maps publishers to include our booklets',
   goal: 'Move people from published to electronic maps',
@@ -48,7 +58,8 @@ manager1_campaign << MarketingCampaignPhase.new({
   planned_costs: 800_000
 })
 
-manager2_campaign = MarketingCampaignPlanPrototype.new # the third product of first product prototype
+# The third product of first product prototype:
+manager2_campaign = MarketingCampaignPlanPrototype.new
 manager2_campaign << MarketingCampaignPhase.new({
   title: 'Street promoters (mobile phone costumes) in the main towns',
   goal: 'Get more people notified',
@@ -65,11 +76,15 @@ manager2_campaign << MarketingCampaignPhase.new({
   planned_costs: 250_000
 })
 
-MarketingCampaignPlanPrototype =~ manager1_campaign # the first manager wins, so his product becomes a new prototype
+# The first manager wins, so his product becomes a new prototype:
+MarketingCampaignPlanPrototype =~ manager1_campaign
 
-financialdir_campaign = MarketingCampaignPlanPrototype.new # the last product of second product prototype
+# The last product of second product prototype:
+financialdir_campaign = MarketingCampaignPlanPrototype.new
 financialdir_campaign >> 5 # remove one of the cloned properties
-financialdir_campaign.phases.each {|phase| phase.complete! } # edit all cloned properties
+
+# Edit all cloned properties:
+financialdir_campaign.phases.each {|phase| phase.complete! }
 
 puts <<~TEXT
   CEO version of campaign plan:\n #{director_campaign}\n

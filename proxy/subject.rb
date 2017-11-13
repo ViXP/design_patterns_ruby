@@ -47,7 +47,7 @@ class InvestorsRegister < AbstractInvestorsRegister
   def show_register
     full_info = ''
     load_data
-    @register.each {|investor| full_info += stringify_info(investor) }
+    @register.each {|investor| full_info << stringify_info(investor) }
     full_info
   end
 

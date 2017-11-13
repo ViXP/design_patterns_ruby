@@ -22,7 +22,7 @@ class TextMessageDecorator
     define_method :"show_#{mth}" do
       if mth == :invokers
         data = ''
-        invokers.each {|inv| data += inv.to_s + '; '}
+        invokers.each {|inv| data << "#{inv}; "}
       else
         data = send(mth)
       end

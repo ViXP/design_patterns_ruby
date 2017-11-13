@@ -82,7 +82,7 @@ class PageIterator < Iterator
   def return_subject
     str = ''
     range = ((@position * @on_page)..(@position * @on_page + @on_page))
-    @subject.items[range].each {|item| str += item.to_s}
+    @subject.items[range].each {|item| str << item.to_s}
     "#{@subject}\n#{str}"
   end
 end

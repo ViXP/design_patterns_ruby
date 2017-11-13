@@ -24,8 +24,8 @@ class SportsDepartment < Department
   @responsibility = :sport
 
   def self.handle(request)
-    super(request) do |request|
-      request << {
+    super(request) do |req|
+      req << {
         title: 'The swimmer breaks the record',
         photo: 'Some cool looking swimmer',
         text: 'Yesterday this not really well known swimmer broke his own ' \
@@ -39,8 +39,8 @@ class NewsDepartment < Department
   @responsibility = :news
 
   def self.handle(request)
-    super(request) do |request|
-      request << {
+    super(request) do |req|
+      req << {
         title: 'The president of Neverland came out of the closet',
         annotation: 'Two days ago journalists saw the president of Neverland ' \
         'while he was coming out of the water closet. He washed his hands ' \
@@ -54,8 +54,8 @@ class CultureDepartment < Department
   @responsibility = :culture
 
   def self.handle(request)
-    super(request) do |request|
-      request << {
+    super(request) do |req|
+      req << {
         title: 'Lady Yaga denies her involvement in a Russian business',
         photo: 'Lady Yaga riding the green midget',
         text: 'Our interviewer asked Lady Yaga after hew yesterday\'s show ' \
@@ -71,8 +71,8 @@ class InvestigationsDepartment < Department
   @responsibility = :investigation
 
   def self.handle(request)
-    super(request) do |request|
-      request << {
+    super(request) do |req|
+      req << {
         title: 'The Mayor of our town steals the carrot!',
         text: 'Our special agents Moulded & Scale conducted their ' \
         'investigation in a sensational case of a disappeared carrot from ' \
@@ -88,7 +88,7 @@ class PrintDepartment < Department
   @responsibility = :print
 
   def self.handle(request)
-    super(request) do |request|
+    super(request) do |req|
       puts request.to_s
       return request if request.sections.first == :all
     end

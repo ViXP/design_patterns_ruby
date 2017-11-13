@@ -12,7 +12,7 @@ class ChapterCaretaker
 
   def history
     history = "Versions of chapter:\n"
-    @versions.each {|chunk| history += "#{chunk.object_id}\n"}
+    @versions.each {|chunk| history << "#{chunk.object_id}\n"}
     history
   end
 

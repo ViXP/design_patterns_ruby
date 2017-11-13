@@ -45,7 +45,7 @@ class Cavendish < Virginia
     @name = 'Danish flavored Cavendish'
     super
     @color = 'brown to black'
-    @aroma += ', moist textured, fresh, plum-like, chocolate, coconut, rum, ' \
+    @aroma << ', moist textured, fresh, plum-like, chocolate, coconut, rum, ' \
     'vanilla taste'
   end
 end
@@ -55,7 +55,7 @@ class Kentucky < Burley
     @name = 'Fire-cured Kentucky Burley'
     super
     @color = 'brown to black'
-    @aroma += ', very strong taste'
+    @aroma << ', very strong taste'
   end
 end
 
@@ -72,6 +72,6 @@ class Latakia < Oriental
     @name = 'Cyprian fire-cured Latakia'
     super
     @color = 'dark brown to black'
-    @aroma += ', foggy, smell of hay and grass, heavy'
+    @aroma << ', foggy, smell of hay and grass, heavy'
   end
 end

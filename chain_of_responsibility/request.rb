@@ -23,7 +23,7 @@ class EditorialOrder
       annotation = page[:annotation] ? "\e[1m#{page[:annotation]}\e[0m\n" : ''
       photo = page[:photo] ? "\e[34m#{page[:photo]}\e[0m\n" : ''
       text = page[:text] ? page[:text] + "\n" : ''
-      full_text += title + annotation + photo + text + '-' * 50 + "\n"
+      full_text << title + annotation + photo + text + '-' * 50 + "\n"
     end
     full_text
   end

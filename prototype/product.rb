@@ -33,8 +33,8 @@ class MarketingCampaignPlan
   def to_s
     string = "Marketing campaign plan for #{title}\n\#\tPhase title:\t" \
       "Planned costs:\tActual costs:\tGoal:\tCompleted:\n"
-    phases.each_with_index {|phase, num| string += "#{num + 1}\t#{phase}\n"}
-    string += "Overall planned costs: #{planned_costs}\tOverall actual " \
+    phases.each_with_index {|phase, num| string << "#{num + 1}\t#{phase}\n"}
+    string << "Overall planned costs: #{planned_costs}\tOverall actual " \
       "costs: #{actual_costs}"
   end
 

@@ -57,7 +57,7 @@ class BookConstructor
 
   def decorate
     str = ''
-    @decorations.each {|deco| str += "#{deco}; "}
+    @decorations.each {|deco| str << "#{deco}; "}
     puts "Assembling the decorations: #{str}"
   end
 

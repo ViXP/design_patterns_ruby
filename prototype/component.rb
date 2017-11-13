@@ -4,6 +4,11 @@ class MarketingCampaignPhase
   attr_reader :planned_costs, :actual_costs
 
   def initialize(args = {})
+    @actual_costs = nil
+    @planned_costs = nil
+    @complete = nil
+    @goal = ''
+    @title = ''
     define_properties args
   end
 

@@ -25,13 +25,13 @@ class TobaccoMixture
 
   def components
     desc = ''
-    @secondary_components.each {|comp| desc += component_to_string(comp) }
+    @secondary_components.each {|comp| desc << component_to_string(comp) }
     desc
   end
 
   def weight
     full_weight = @main_component.weight
-    @secondary_components.each {|comp| full_weight += comp.weight }
+    @secondary_components.each {|comp| full_weight << comp.weight }
     full_weight
   end
 
@@ -49,7 +49,7 @@ class TobaccoMixture
 
   def similar_products
     prods = ''
-    @similar_products.each {|product| prods += "- #{product}\n" }
+    @similar_products.each {|product| prods << "- #{product}\n" }
     prods
   end
 
@@ -61,7 +61,7 @@ class TobaccoMixture
 
   def components_aroma
     aroma = ''
-    @secondary_components.each {|comp| aroma += comp.aroma + ' ' }
+    @secondary_components.each {|comp| aroma << comp.aroma + ' ' }
     aroma
   end
 end

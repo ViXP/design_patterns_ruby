@@ -41,7 +41,7 @@ class Guitar
     @model = gets.slice(0, 3).tr("\n", '').upcase
     @model = @model.length > 1 ? @model : 'GT'
     @@models[@model] = @@models[@model] ? @@models[@model] + 1 : 1
-    @model += "-#{@@models[@model]}"
+    @model << "-#{@@models[@model]}"
   end
 
   def pickups

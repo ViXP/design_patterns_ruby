@@ -54,7 +54,7 @@ class EngExpression < Expression
     unless @context.current_type == :eng
       str = ''
       @context.current_data.split(' ').each do |sym|
-        str += (DICTIONARY.invert[sym] || sym).to_s
+        str << (DICTIONARY.invert[sym] || sym).to_s
       end
       @context.current_type = :eng
       @context.current_data = str
@@ -68,7 +68,7 @@ class MorzeExpression < Expression
     unless @context.current_type == :mor
       str = ''
       @context.current_data.split('').each do |sym|
-        str += "#{DICTIONARY[sym.downcase.to_sym] || sym} "
+        str << "#{DICTIONARY[sym.downcase.to_sym] || sym} "
       end
       @context.current_type = :mor
       @context.current_data = str

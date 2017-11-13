@@ -41,7 +41,7 @@ class Truck < SkateComponent
 
   def colors
     string = ''
-    @colors.each {|color| string += "#{color}/" }
+    @colors.each {|color| string << "#{color}/" }
     string.chomp('/')
   end
 
@@ -66,7 +66,7 @@ class Bearing < SkateComponent
 
   def colors
     string = ''
-    @colors.each {|color| string += "#{color}/" }
+    @colors.each {|color| string << "#{color}/" }
     string.chomp('/')
   end
 

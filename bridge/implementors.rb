@@ -18,7 +18,7 @@ class Room
 
   def objects
     string = ''
-    @objects.each {|obj| string += obj.to_s + ', '}
+    @objects.each {|obj| string << obj.to_s + ', '}
     string
   end
 

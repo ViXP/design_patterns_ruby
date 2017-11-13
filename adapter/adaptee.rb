@@ -7,7 +7,7 @@ class GEOLocatorRemoteAPI
   def self.coords
     string = ''
     @coords.each do |coord|
-      string += wrt_coords(coord)
+      string << wrt_coords(coord)
     end
     string
   end

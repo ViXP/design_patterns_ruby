@@ -20,6 +20,6 @@ class PasswordSendingMachine
     @clients.each do |client|
       threads << Thread.new { client.update(data) }
     end
-    threads.each {|thr| thr.join }
+    threads.each(&:join)
   end
 end

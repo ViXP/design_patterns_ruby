@@ -1,6 +1,6 @@
 # CEO of average software development company decided to make the marketing
 # campaign plan for his new GPS-navigator product. He came up with several
-# ideas, and throw it for the brainstorm to two of his top manamgers. The one,
+# ideas, and throw it for the brainstorm to two of his top managers. The one,
 # who will come with better ideas will get his salary increase. The final
 # version of plan will be revised and approved by CFO.
 #
